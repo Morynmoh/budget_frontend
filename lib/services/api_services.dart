@@ -204,6 +204,69 @@ Future<List<Map<String, dynamic>>> getUsers() async {
       throw Exception('Failed to delete category');
     }
   }
+
+// ---------------Update Methods ------------------
+Future<bool> updateAccount(int id, Map<String, dynamic> updatedData) async {
+    final url = Uri.parse('$baseUrl/accounts/$id');
+
+    try {
+      final response = await http.put(
+        url,
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode(updatedData),
+      );
+
+      if (response.statusCode == 200) {
+        // Account updated successfully
+        return true;
+      } else {
+        // Handle error if response is not 200
+        print('Error: ${response.statusCode} - ${response.body}');
+        return false;
+      }
+    } catch (e) {
+      print('Failed to update account: $e');
+      return false;
+    }
+  }
+
+Future<bool> updateCategory(int id, Map<String, dynamic> updatedData) async {
+    final url = Uri.parse('$baseUrl/categories/$id');
+    try {
+      final response = await http.put(
+        url,
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode(updatedData),
+      );
+
+      if (response.statusCode == 200) {
+        // Category updated successfully
+        return true;
+      } else {
+        // Handle error if response is not 200
+        print('Error: ${response.statusCode} - ${response.body}');
+        return false;
+      }
+    } catch (e) {
+      print('Failed to update category: $e');
+      return false;
+    }
+  }
+
+  Future<void> updateExpense(int id, Map<String, dynamic> updatedData) async {
+    final url = Uri.parse('$baseUrl/expenses/$id');
+
+    final response = await http.put(
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: json.encode(updatedData),
+    );
+
+    if (response.statusCode != 200) {
+      throw Exception('Failed to update Expenses');
+    }
+  }
+
   // ------------------ Post Methods ------------------
 
   Future<bool> addExpense(Map<String, dynamic> expenseData) async {
@@ -273,24 +336,6 @@ Future<List<Map<String, dynamic>>> getUsers() async {
   }
 
 
-
-  // Future<bool> addAccount(Map<String, dynamic> accountData) async {
-    
-  //   final url = Uri.parse('$baseUrl/accounts');
-  //   final response = await http.post(
-  //     url,
-  //     headers: {'Content-Type': 'application/json'},
-  //     body: jsonEncode({'account': accountData}),
-  //   );
-
-  //   if (response.statusCode == 201 || response.statusCode == 200) {
-  //     print('Account added successfully: ${response.body}');
-  //     return true;
-  //   } else {
-  //     print('Failed to add account: ${response.body}');
-  //     return false;
-  //   }
-  // }
 
   Future<bool> addCategory(Map<String, dynamic> categoryData) async {
     final url = Uri.parse('$baseUrl/categories');
