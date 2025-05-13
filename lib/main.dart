@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'screens/auth/login_screen.dart';
+import 'screens/auth/signup_screen.dart'; // ✅ Import signup
 import 'screens/dashboard/dashboard_screen.dart';
 import 'providers/auth_provider.dart';
 
@@ -26,7 +27,9 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (_) => const LoginScreen(),
+        '/login': (_) => const LoginScreen(),
         '/dashboard': (_) => const DashboardScreen(),
+        '/signup': (_) => SignUpScreen(), // ✅ Added signup route
       },
     );
   }
