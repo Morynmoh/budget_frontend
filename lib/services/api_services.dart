@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiService {
-  static const String baseUrl = 'http://localhost:3000'; // Your backend URL
+  static const String baseUrl = 'http://192.168.17.95:3000'; //  Your backend URL
 
   // Mock implementation of getJwtToken
   Future<String> getJwtToken() async {
