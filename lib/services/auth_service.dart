@@ -1,11 +1,10 @@
-
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 // import '../config/api_constants.dart';
 
 class AuthService {
-  static const String baseUrl = 'http://localhost:3000';
+  static const String baseUrl = 'http://206.189.131.126:3012';
 
   static Future<bool> login(String email, String password) async {
     final url = Uri.parse('$baseUrl/login');

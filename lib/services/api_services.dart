@@ -3,7 +3,8 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiService {
-  static const String baseUrl = 'http://192.168.17.95:3000'; //  Your backend URL
+  static const String baseUrl =
+      'http://206.189.131.126:3012'; //  Your backend URL
 
   // Mock implementation of getJwtToken
   Future<String> getJwtToken() async {
@@ -41,7 +42,6 @@ class ApiService {
     }
   }
 
-
   // Signup
   Future<void> signup(String name, String email, String password) async {
     final url = Uri.parse('$baseUrl/signup');
@@ -66,7 +66,7 @@ class ApiService {
     }
   }
 
-Future<Map<String, dynamic>> getUserById(int userId) async {
+  Future<Map<String, dynamic>> getUserById(int userId) async {
     final url = Uri.parse('$baseUrl/users/$userId');
     final response = await http.get(
       url,
@@ -84,8 +84,7 @@ Future<Map<String, dynamic>> getUserById(int userId) async {
     }
   }
 
-
-Future<List<Map<String, dynamic>>> getUsers() async {
+  Future<List<Map<String, dynamic>>> getUsers() async {
     final url = Uri.parse('$baseUrl/users');
     final response = await http.get(
       url,
@@ -112,25 +111,23 @@ Future<List<Map<String, dynamic>>> getUsers() async {
     }
   }
 
+  // Future<List<Map<String, dynamic>>> getUsers() async {
+  //     final url = Uri.parse('$baseUrl/users');
+  //     final response = await http.get(
+  //       url,
+  //       headers: {'Content-Type': 'application/json'},
+  //     );
 
-// Future<List<Map<String, dynamic>>> getUsers() async {
-//     final url = Uri.parse('$baseUrl/users');
-//     final response = await http.get(
-//       url,
-//       headers: {'Content-Type': 'application/json'},
-//     );
+  //     if (response.statusCode == 200) {
+  //       final data = jsonDecode(response.body);
+  //       return List<Map<String, dynamic>>.from(data);
+  //     } else {
+  //       throw Exception('Failed to load users: ${response.body}');
+  //     }
+  //   }
 
-//     if (response.statusCode == 200) {
-//       final data = jsonDecode(response.body);
-//       return List<Map<String, dynamic>>.from(data);
-//     } else {
-//       throw Exception('Failed to load users: ${response.body}');
-//     }
-//   }  
-  
   // ------------------ Fetch Methods ------------------
-  
-  
+
   Future<List<Map<String, dynamic>>> getAccounts() async {
     final url = Uri.parse('$baseUrl/accounts');
     final response = await http.get(
@@ -161,7 +158,7 @@ Future<List<Map<String, dynamic>>> getUsers() async {
     }
   }
 
-    Future<List<Map<String, dynamic>>> getExpenses() async {
+  Future<List<Map<String, dynamic>>> getExpenses() async {
     final url = Uri.parse('$baseUrl/expenses');
     final response = await http.get(
       url,
@@ -178,7 +175,6 @@ Future<List<Map<String, dynamic>>> getUsers() async {
 
   // ----------------------Delete Methods---------------
   Future<void> deleteAccount(int id) async {
-  
     final url = Uri.parse('$baseUrl/accounts/$id');
     final response = await http.delete(url);
 
@@ -196,7 +192,7 @@ Future<List<Map<String, dynamic>>> getUsers() async {
     }
   }
 
-    Future<void> deleteCategory(int id) async {
+  Future<void> deleteCategory(int id) async {
     final url = Uri.parse('$baseUrl/categories/$id');
     final response = await http.delete(url);
 
@@ -205,8 +201,8 @@ Future<List<Map<String, dynamic>>> getUsers() async {
     }
   }
 
-// ---------------Update Methods ------------------
-Future<bool> updateAccount(int id, Map<String, dynamic> updatedData) async {
+  // ---------------Update Methods ------------------
+  Future<bool> updateAccount(int id, Map<String, dynamic> updatedData) async {
     final url = Uri.parse('$baseUrl/accounts/$id');
 
     try {
@@ -230,7 +226,7 @@ Future<bool> updateAccount(int id, Map<String, dynamic> updatedData) async {
     }
   }
 
-Future<bool> updateCategory(int id, Map<String, dynamic> updatedData) async {
+  Future<bool> updateCategory(int id, Map<String, dynamic> updatedData) async {
     final url = Uri.parse('$baseUrl/categories/$id');
     try {
       final response = await http.put(
@@ -319,7 +315,7 @@ Future<bool> updateCategory(int id, Map<String, dynamic> updatedData) async {
       return false;
     }
   }
-  
+
   Future<bool> addAccount(Map<String, dynamic> accountData) async {
     final token = await getJwtToken();
 
@@ -334,8 +330,6 @@ Future<bool> updateCategory(int id, Map<String, dynamic> updatedData) async {
 
     return response.statusCode == 201;
   }
-
-
 
   Future<bool> addCategory(Map<String, dynamic> categoryData) async {
     final url = Uri.parse('$baseUrl/categories');
